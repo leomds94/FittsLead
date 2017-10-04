@@ -8,11 +8,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using FittsLead.Models;
+using FittsLead.Controllers;
 
 namespace FittsLead
 {
     public class Startup
     {
+        public static List<SpeedTarget> speed;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

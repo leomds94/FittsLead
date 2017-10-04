@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FittsLead", "FittsLead\FittsLead.csproj", "{8C7F1A3A-EBEE-40A1-82A9-793681DFFB5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1B4B0127-8109-4CE0-B5A4-3C9EDE658A7E}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C7F1A3A-EBEE-40A1-82A9-793681DFFB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7F1A3A-EBEE-40A1-82A9-793681DFFB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7F1A3A-EBEE-40A1-82A9-793681DFFB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7F1A3A-EBEE-40A1-82A9-793681DFFB5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABB596CC-2C5C-441D-ADD6-903A75535D77}
+	EndGlobalSection
+EndGlobal

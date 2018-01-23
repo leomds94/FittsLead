@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace FittsLead.Models
 {
-    public class FittsObject
+    public class FittsUser
     {
         [Key]
-        public int FittsObjectId { get; set; }
-
         public int UserId { get; set; }
-        public FittsUser FittsUser { get; set; }
 
-        public ClipRectangle ClipRectangle { get; set; }
-        public ClickedPoint ClickedPoint { get; set; }
+        public string Device { get; set; }
+        public int StageCount { get; set; }
+
+        public List<FittsObject> FittsObjects { get; set; }
+        public List<StageThreshold> StageThreshold { get; set; }
     }
 }

@@ -1,22 +1,22 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
-using FittsLead.Models;
 using FittsLead.Controllers;
+using FittsLead.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
+using FittsLead.Models;
 
 namespace FittsLead
 {
     public class Startup
     {
-        public static List<SpeedTarget> speed;
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,12 +27,30 @@ namespace FittsLead
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<FittsDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
             // Add framework services.
-            services
-                .AddMvc()
-                // Maintain property names during serialization. See:
-                // https://github.com/aspnet/Announcements/issues/194
-                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            services.AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
+            services.Configure<RequestLocalizationOptions>(
+            opts =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("pt"),
+                    new CultureInfo("pt-BR"),
+                };
+
+                opts.DefaultRequestCulture = new RequestCulture("pt-BR");
+                // Formatting numbers, dates, etc.
+                opts.SupportedCultures = supportedCultures;
+                // UI strings that we have localized.
+                opts.SupportedUICultures = supportedCultures;
+            });
 
             // Add Kendo UI services to the services container
             services.AddKendo();
@@ -45,6 +63,7 @@ namespace FittsLead
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -52,6 +71,9 @@ namespace FittsLead
             }
 
             app.UseStaticFiles();
+
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
 
             app.UseMvc(routes =>
             {

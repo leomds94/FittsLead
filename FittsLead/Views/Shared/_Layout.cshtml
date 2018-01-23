@@ -59,7 +59,6 @@
             </footer>
     </div>
 
-    @RenderSection("scripts", required: false)
     <script>
         $(document).ready(function () {
             $("#responsive-panel").kendoResponsivePanel({
@@ -72,5 +71,7 @@
             $("#responsive-panel").getKendoResponsivePanel().toggle();
         }
     </script>
+    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
